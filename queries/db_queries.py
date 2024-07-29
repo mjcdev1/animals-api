@@ -5,7 +5,7 @@ ADD_CLASS = """
             """
 
 ADD_ORDER = """
-            INSERT INTO orders (name, class_id) 
+            INSERT INTO orders (name, class_id)
             VALUES (
                 %s,
                 (SELECT id FROM classes WHERE name = %s)
@@ -14,7 +14,7 @@ ADD_ORDER = """
             """
 
 ADD_FAMILY = """
-            INSERT INTO families (name, order_id) 
+            INSERT INTO families (name, order_id)
             VALUES (
                 %s,
                 (SELECT id FROM orders WHERE name = %s)
@@ -23,7 +23,7 @@ ADD_FAMILY = """
             """
 
 ADD_SPECIES = """
-            INSERT INTO species (name, family_id) 
+            INSERT INTO species (name, family_id)
             VALUES (
                 %s,
                 (SELECT id FROM families WHERE name = %s)
@@ -32,7 +32,7 @@ ADD_SPECIES = """
             """
 
 ADD_SUBSPECIES = """
-            INSERT INTO subspecies (name, species_id) 
+            INSERT INTO subspecies (name, species_id)
             VALUES (
                 %s,
                 (SELECT id FROM species WHERE name = %s)
@@ -41,19 +41,19 @@ ADD_SUBSPECIES = """
 
 ADD_ANIMAL = """
             INSERT INTO animals (
-                common_name, 
-                class_id, 
-                order_id, 
-                family_id, 
-                species_id, 
-                subspecies_id, 
-                scientific_name, 
-                conservation_status, 
-                attributes, 
-                header_img_url, 
-                addl_img_urls, 
-                species_desc, 
-                subspecies_desc, 
+                common_name,
+                class_id,
+                order_id,
+                family_id,
+                species_id,
+                subspecies_id,
+                scientific_name,
+                conservation_status,
+                attributes,
+                header_img_url,
+                addl_img_urls,
+                species_desc,
+                subspecies_desc,
                 sources
             ) VALUES (
                 %s,
@@ -74,7 +74,7 @@ ADD_ANIMAL = """
             """
 
 GET_ANIMALS = """
-            SELECT 
+            SELECT
                 a.id,
                 a.common_name,
                 c.name AS class_name,

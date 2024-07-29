@@ -1,36 +1,42 @@
 import psycopg2
 from queries import db_queries
+from typing import Dict, List, Any
+from database import Database
+
 
 class DBOps:
-    def __init__(self, database):
+    def __init__(self, database: Database) -> None:
         self.database = database
-        
-    def add_animal_data(self, data):
+
+    def add_animal_data(self, data: Dict[str, Any]) -> Dict[str, str]:
         conn = None
         cursor = None
-        
+
         try:
             conn = self.database.db_connect()
             cursor = conn.cursor()
-            
+
             conn.autocommit = False
-            
+
             query = db_queries.ADD_CLASS
             cursor.execute(query, (data['class_name'],))
-            
+
             query = db_queries.ADD_ORDER
             cursor.execute(query, (data['order_name'], data['class_name']))
-            
+
             query = db_queries.ADD_FAMILY
             cursor.execute(query, (data['family_name'], data['order_name']))
-            
+
             query = db_queries.ADD_SPECIES
             cursor.execute(query, (data['species_name'], data['family_name']))
-            
+
             if data['subspecies_name']:
                 query = db_queries.ADD_SUBSPECIES
-                cursor.execute(query, (data['subspecies_name'], data['species_name']))
-                
+                cursor.execute(
+                    query,
+                    (data['subspecies_name'], data['species_name'])
+                )
+
             query = db_queries.ADD_ANIMAL
             cursor.execute(query, (
                 data['common_name'],
@@ -48,34 +54,43 @@ class DBOps:
                 data.get('subspecies_desc', None),
                 data.get('sources', None)
             ))
-            
+
             conn.commit()
-            
+
             return {"message": "Data added successfully."}
-        
+
         except psycopg2.Error as e:
             if conn:
                 conn.rollback()
             if 'unique_violation' in str(e):
-                return {"error": "Unique constraint violation: Duplicate record exists."}
+                return {
+                    "error":
+                        "Unique constraint violation: Duplicate record exists."
+
+                }
             return {"error": f"SQL Error: {str(e)}"}
-    
+
         finally:
             if cursor:
                 cursor.close()
             if conn:
                 self.database.db_close(conn)
-    
-    def get_animals_data(self, requested_data):
-        try: 
+
+    def get_animals_data(
+        self, requested_data: Dict[str, str]
+    ) -> List[Dict[str, Any]]:
+        conn = None
+        cursor = None
+
+        try:
             conn = self.database.db_connect()
             cursor = conn.cursor()
-            
+
             query = db_queries.GET_ANIMALS
-            
+
             filter_condition = ""
             param = None
-        
+
             if requested_data:
                 for key, value in requested_data.items():
                     if key == 'common_name':
@@ -87,27 +102,32 @@ class DBOps:
                     elif key == 'family_name':
                         filter_condition = "f.name = %s"
                     param = value
-                    break 
-        
+                    break
+
             if filter_condition:
                 query += " WHERE " + filter_condition
-        
+
             cursor.execute(query, (param,))
-            
+
             rows = cursor.fetchall()
-            
+
+            if cursor.description is None:
+                raise ValueError('No columns returned from the query')
+
             column_names = [desc[0] for desc in cursor.description]
-            
+
             animals = [dict(zip(column_names, row)) for row in rows]
 
             if not animals:
-                raise ValueError('Animal(s) not found from the given parameters')
-        
+                raise ValueError(
+                    'Animal(s) not found from the given parameters'
+                )
+
             return animals
-        
+
         except Exception as e:
             raise e
-        
+
         finally:
             if cursor:
                 cursor.close()
