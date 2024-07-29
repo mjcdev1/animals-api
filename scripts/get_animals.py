@@ -1,6 +1,9 @@
-import requests
-from dotenv import load_dotenv
+"""TEMPORARY PLACEHOLDER DOCSTRING!"""
+
 import os
+
+from dotenv import load_dotenv
+import requests
 
 load_dotenv('database.env')
 

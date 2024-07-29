@@ -3,3 +3,8 @@ psycopg2-binary
 gunicorn==20.1.0
 Werkzeug
 python-dotenv
+mypy
+flake8
+types-requests
+types-psycopg2
+types-flask

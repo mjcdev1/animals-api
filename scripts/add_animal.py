@@ -1,10 +1,13 @@
-import requests
-from dotenv import load_dotenv
+"""TEMPORARY PLACEHOLDER DOCSTRING!"""
+
 import os
+
+from dotenv import load_dotenv
+import requests
 
 load_dotenv('database.env')
 
-
+         
 url = 'http://127.0.0.1:5000/add_animal_data'
 url = (
     'https://animal-api-783131d61b3b.herokuapp.com/add_animal_data'

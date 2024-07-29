@@ -1,3 +1,5 @@
+"""TEMPORARY PLACEHOLDER DOCSTRING!"""
+
 ADD_CLASS = """
             INSERT INTO classes (name)
             VALUES (%s)

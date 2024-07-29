@@ -1,4 +1,7 @@
+"""TEMPORARY PLACEHOLDER DOCSTRING!"""
+
 import os
+
 from dotenv import load_dotenv
 from psycopg2 import pool
 from psycopg2.extensions import connection
@@ -7,7 +10,10 @@ load_dotenv('.env')
 
 
 class Database:
+    """TEMPORARY PLACEHOLDER DOCSTRING!"""
+
     def __init__(self) -> None:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
         self.database_name = os.getenv('DATABASE_NAME')
         self.database_host = os.getenv('DATABASE_HOST')
         self.database_user = os.getenv('DATABASE_USER')
@@ -24,6 +30,7 @@ class Database:
         )
 
     def db_connect(self) -> connection:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
         conn = self.db_pool.getconn()
         assert isinstance(conn, connection), (
             "db_pool.getconn() did not return a psycopg2 connection"
@@ -31,4 +38,5 @@ class Database:
         return conn
 
     def db_close(self, conn: connection) -> None:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
         self.db_pool.putconn(conn)

@@ -1,14 +1,21 @@
+"""TEMPORARY PLACEHOLDER DOCSTRING!"""
+
+from typing import Any, Dict, List
+
+from database import Database
 import psycopg2
 from queries import db_queries
-from typing import Dict, List, Any
-from database import Database
 
 
 class DBOps:
+    """TEMPORARY PLACEHOLDER DOCSTRING!"""
+
     def __init__(self, database: Database) -> None:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
         self.database = database
 
     def add_animal_data(self, data: Dict[str, Any]) -> Dict[str, str]:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
         conn = None
         cursor = None
 
@@ -64,9 +71,7 @@ class DBOps:
                 conn.rollback()
             if 'unique_violation' in str(e):
                 return {
-                    "error":
-                        "Unique constraint violation: Duplicate record exists."
-
+                    "error": "Unique constraint violation: Duplicate record exists."
                 }
             return {"error": f"SQL Error: {str(e)}"}
 
@@ -76,9 +81,8 @@ class DBOps:
             if conn:
                 self.database.db_close(conn)
 
-    def get_animals_data(
-        self, requested_data: Dict[str, str]
-    ) -> List[Dict[str, Any]]:
+    def get_animals_data(self, requested_data: Dict[str, str]) -> List[Dict[str, Any]]:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
         conn = None
         cursor = None
 
@@ -119,9 +123,7 @@ class DBOps:
             animals = [dict(zip(column_names, row)) for row in rows]
 
             if not animals:
-                raise ValueError(
-                    'Animal(s) not found from the given parameters'
-                )
+                raise ValueError('Animal(s) not found from the given parameters')
 
             return animals
 

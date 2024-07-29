@@ -1,12 +1,17 @@
-from flask import Flask, request, jsonify
+"""TEMPORARY PLACEHOLDER DOCSTRING!"""
+
 import os
 from typing import Any, Dict, Optional
+
 from database.db_ops import DBOps
+from flask import Flask, jsonify, request
 
 
 def init_routes(app: Flask, db_ops: DBOps) -> None:
+    """TEMPORARY PLACEHOLDER DOCSTRING!"""
     @app.route('/')
     def index() -> str:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
         message = '''
         <!DOCTYPE html>
         <html>
@@ -70,6 +75,7 @@ def init_routes(app: Flask, db_ops: DBOps) -> None:
 
     @app.route('/add_animal_data', methods=['POST'])
     def add_animal_data() -> Any:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
         try:
             api_key = request.args.get('api_key')
             data: Optional[Dict[str, Any]] = request.json
@@ -112,6 +118,7 @@ def init_routes(app: Flask, db_ops: DBOps) -> None:
 
     @app.route('/get_animals', methods=['GET'])
     def get_animal() -> Any:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
         try:
             api_key = request.args.get('api_key')
             if not api_key or api_key != os.getenv('API_KEY'):
