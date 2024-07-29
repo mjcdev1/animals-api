@@ -10,7 +10,7 @@ url = 'https://animal-api-783131d61b3b.herokuapp.com/get_animals' #-- IF TESTING
 api_key = os.getenv('API_KEY')  
 
 requested_items = {
-    "class_name": "Mammalia",
+    "common_name": "African bush sdff",
 }
 
 response = requests.get(url, params={'api_key': api_key}, json=requested_items)

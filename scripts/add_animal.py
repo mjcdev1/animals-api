@@ -10,13 +10,13 @@ url = 'https://animal-api-783131d61b3b.herokuapp.com/add_animal_data' #-- IF TES
 api_key = os.getenv('API_KEY')  
 
 data = {
-    "common_name": "African bush f",
+    "common_name": "African bush sdff",
     "class_name": "Mammalia",
     "order_name": "Proboscidea",
     "family_name": "Elephantidae",
     "species_name": "Loxodonta africana",
     "subspecies_name": None,
-    "scientific_name": "Loxodonta africanaaaaafff",
+    "scientific_name": "Loxodonta africanaaaasffafff",
     "conservation_status": "Endangered",
     "attributes": None,
     "header_img_url": None,
