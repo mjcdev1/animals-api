@@ -31,17 +31,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 #### Security
 
-## APP VERSION [0.4.0] (Frontend [0.1.0] / Backend [0.3.0])
+## APP VERSION [0.5.0] (Frontend [0.1.0] / Backend [0.4.0])
+
+## Backend [0.4.0] - 7/31/2023
+### Added
+- Added new endpoint to be able to retrieve marker data
+  - Added query for selecting a specific marker by mid (marker id) 
+  - New function in DBOps to call the query on the database and return the data to the API 
+  - Wrote script to call the endpoint and get the desired data for the marker 
 
 ## Backend [0.3.0] - 7/31/2023
 ### Added
 - Created new package and script for utility functions
 - Created utility function to generate IDs for either markers or users (soon to come) 
-- Created new database table to store markers 
-- Added new query for inserting markers into marker table 
-- Added new function in DBOps to to call the new marker insert query 
-- Added new endpoint that calls the new function in DPOpts
-- Wrote new script to call the endpoint with some temporary fake data 
+- Created new database table to store markers
+- Added new endpoint to be able to add markers
+  - Added query for inserting markers into marker table 
+  - New function in DBOps to to call the new marker insert query 
+  - Wrote new script to call the endpoint with some temporary fake data 
 
 ## Backend [0.2.3] - 7/29/2023
 ### Added
