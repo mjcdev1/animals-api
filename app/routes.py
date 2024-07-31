@@ -180,3 +180,32 @@ def init_routes(app: Flask, db_ops: DBOps) -> None:
             return jsonify({
                 "error": "An unexpected error occurred."
             }), 500
+            
+    @app.route('/get_marker', methods=['GET'])
+    def get_marker() -> Any:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
+        try:
+            api_key = request.args.get('api_key')
+            if not api_key or api_key != os.getenv('API_KEY'):
+                raise ValueError("API key is invalid or missing.")
+    
+            req_marker = request.args.get('req_marker')
+            if not req_marker:
+                raise ValueError("No marker ID provided")
+    
+            marker = db_ops.get_marker_data(req_marker)
+    
+            if not marker:
+                raise LookupError("Marker could not be found in database")
+    
+            return jsonify(marker)
+    
+        except ValueError as e:
+            return jsonify({"error": str(e)}), 403
+        except LookupError as e:
+            return jsonify({"error": str(e)}), 404
+        except Exception:
+            return jsonify({
+                "error": "An unexpected error occurred."
+            }), 500
+    

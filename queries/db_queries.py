@@ -123,3 +123,18 @@ ADD_MARKER = """
                 %s
             );
             """
+            
+GET_MARKER = """
+            SELECT
+                m.mid,
+                m.marker_lat_lon,
+                m.marker_location,
+                m.marker_title,
+                m.marker_date_placed,
+                m.marker_placed_by_uid, 
+                m.marker_status,
+                m.marker_animal_details,
+                m.marker_stats
+            FROM markers m
+            WHERE m.mid = %s
+            """

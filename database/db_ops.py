@@ -174,3 +174,38 @@ class DBOps:
                 cursor.close()
             if conn:
                 self.database.db_close(conn)
+
+    def get_marker_data(self, req_marker: str) -> Dict[str, Any]:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
+        conn = None
+        cursor = None
+    
+        try:
+            conn = self.database.db_connect()
+            cursor = conn.cursor()
+    
+            query = db_queries.GET_MARKER
+    
+            cursor.execute(query, (req_marker,))
+    
+            row = cursor.fetchone()
+    
+            if cursor.description is None:
+                raise ValueError('No columns returned from the query')
+    
+            if row is None:
+                raise LookupError('Marker not found from the given parameters')
+    
+            column_names = [desc[0] for desc in cursor.description]
+            marker = dict(zip(column_names, row))
+    
+            return marker
+    
+        except Exception as e:
+            raise e
+    
+        finally:
+            if cursor:
+                cursor.close()
+            if conn:
+                self.database.db_close(conn)
