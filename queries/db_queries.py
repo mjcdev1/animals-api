@@ -99,3 +99,27 @@ GET_ANIMALS = """
             JOIN species s ON a.species_id = s.id
             LEFT JOIN subspecies ss ON a.subspecies_id = ss.id
             """
+            
+ADD_MARKER = """
+            INSERT INTO markers (
+                mid,
+                marker_lat_lon,
+                marker_location,
+                marker_title,
+                marker_date_placed,
+                marker_placed_by_uid,
+                marker_status,
+                marker_animal_details,
+                marker_stats
+            ) VALUES (
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s
+            );
+            """

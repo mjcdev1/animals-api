@@ -97,7 +97,7 @@ def init_routes(app: Flask, db_ops: DBOps) -> None:
 
             if missing_fields:
                 raise ValueError(
-                    "The animal data is", "missing some required fields."
+                    "Animal data missing some required fields"
                 )
 
             result = db_ops.add_animal_data(data)
@@ -142,3 +142,41 @@ def init_routes(app: Flask, db_ops: DBOps) -> None:
             return jsonify({"error": str(e)}), 404
         except Exception:
             return jsonify({"error": "An unexpected error occurred."}), 500
+            
+    @app.route('/add_marker_data', methods=['POST'])
+    def add_marker_data() -> Any:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
+        try:
+            api_key = request.args.get('api_key')
+            data: Optional[Dict[str, Any]] = request.json
+
+            if not api_key or api_key != os.getenv('API_KEY'):
+                raise ValueError("API key is invalid or missing.")
+
+            if data is None:
+                raise ValueError("No data provided")
+
+            missing_fields = [
+                key for key, value in data.items() if value is None
+            ]
+
+            if missing_fields:
+                raise ValueError(
+                    "Marker data missing some required fields"
+                )
+
+            result = db_ops.add_marker_data(data)
+
+            if 'error' in result:
+                raise ValueError(result['error'])
+
+            return jsonify(result)
+
+        except ValueError as e:
+            return jsonify({"error": str(e)}), 403
+        except LookupError as e:
+            return jsonify({"error": str(e)}), 404
+        except Exception:
+            return jsonify({
+                "error": "An unexpected error occurred."
+            }), 500

@@ -135,3 +135,42 @@ class DBOps:
                 cursor.close()
             if conn:
                 self.database.db_close(conn)
+                
+    def add_marker_data(self, data: Dict[str, Any]) -> Dict[str, str]:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
+        conn = None
+        cursor = None
+
+        try:
+            conn = self.database.db_connect()
+            cursor = conn.cursor()
+
+            conn.autocommit = False
+
+            query = db_queries.ADD_MARKER
+            cursor.execute(query, (
+                data['mid'],
+                data['marker_lat_lon'],
+                data['marker_location'],
+                data['marker_title'],
+                data['marker_date_placed'],
+                data['marker_placed_by_uid'],
+                data['marker_status'],
+                data['marker_animal_details'],
+                data['marker_stats'],
+            ))
+
+            conn.commit()
+
+            return {"message": "Data added successfully."}
+
+        except psycopg2.Error as e:
+            if conn:
+                conn.rollback()
+            return {"error": f"SQL Error: {str(e)}"}
+
+        finally:
+            if cursor:
+                cursor.close()
+            if conn:
+                self.database.db_close(conn)
