@@ -13,7 +13,7 @@ url = (
 )  # -- IF TESTING WITH HEROKU
 api_key = os.getenv('API_KEY')
 
-req_user = "m_e2ca3749-df3e-4c57-a4c3-cd7be89ad116"
+req_user = "u_377df8c2-e8b1-41f0-b899-a75781c498dd"
 
 response = requests.get(url, params={'api_key': api_key, 'req_user': req_user})
 

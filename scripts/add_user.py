@@ -16,8 +16,8 @@ api_key = os.getenv('API_KEY')
 
 data = {
     "uid": utils.generate_id("user"),
-    "username": 'temp',
-    "email": "temp@temp",
+    "username": 'temp2',
+    "email": "temp2@temp",
     "hashed_pw": "f93fef_fake_hashed_pw_2f234324",
     "user_stats": (
         '{"upvotes": 0, "downvotes": 0, '

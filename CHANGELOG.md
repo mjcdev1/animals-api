@@ -31,7 +31,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 #### Security
 
-## APP VERSION [0.5.0] (Frontend [0.1.0] / Backend [0.4.0])
+## APP VERSION [0.6.0] (Frontend [0.1.0] / Backend [0.5.0])
+
+## Backend [0.5.0] - 8/1/2023
+### Added
+- Created new 'users' table in database
+  - uid (user_id)
+  - username
+  - email
+  - hashed_pw
+  - user_stats
+- Added new endpoints to be able to add or retrieve users to/ from the users table 
+  - Query for inserting into users table
+  - Query for selecting from users table
+  - DBOps functions for calling these insert/ select statements
+  - Endpoints call these functions and handle errors
+  - Wrote test scripts to be able to call these endpoints
+
+### Fixed
+- Fixed testrunner to also run on the new develop branch, not just on main 
 
 ## Backend [0.4.0] - 7/31/2023
 ### Added
@@ -45,6 +63,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Created new package and script for utility functions
 - Created utility function to generate IDs for either markers or users (soon to come) 
 - Created new database table to store markers
+  - mid (marker id)
+  - marker_lat_lon
+  - marker_location
+  - marker_title
+  - marker_date_placed
+  - marker_placed_by_uid
+  - marker_status
+  - marker_animal_details
+  - marker_stats
 - Added new endpoint to be able to add markers
   - Added query for inserting markers into marker table 
   - New function in DBOps to to call the new marker insert query 

@@ -145,7 +145,7 @@ ADD_USER = """
                 username,
                 email,
                 hashed_pw,
-                user_stats,
+                user_stats
             ) VALUES (
                 %s,
                 %s,
@@ -157,11 +157,11 @@ ADD_USER = """
             
 GET_USER = """
             SELECT
-                m.uid,
-                m.username,
-                m.email,
-                m.hashed_pw,
-                m.user_stats,
+                u.uid,
+                u.username,
+                u.email,
+                u.hashed_pw,
+                u.user_stats
             FROM users u
             WHERE u.uid = %s
             """

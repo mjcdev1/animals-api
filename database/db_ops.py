@@ -227,7 +227,7 @@ class DBOps:
                 data['username'],
                 data['email'],
                 data['hashed_pw'],
-                data['user_stats'],
+                data['user_stats']
             ))
 
             conn.commit()
