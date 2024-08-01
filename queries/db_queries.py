@@ -138,3 +138,30 @@ GET_MARKER = """
             FROM markers m
             WHERE m.mid = %s
             """
+
+ADD_USER = """
+            INSERT INTO users (
+                uid,
+                username,
+                email,
+                hashed_pw,
+                user_stats,
+            ) VALUES (
+                %s,
+                %s,
+                %s,
+                %s,
+                %s
+            );
+            """
+            
+GET_USER = """
+            SELECT
+                m.uid,
+                m.username,
+                m.email,
+                m.hashed_pw,
+                m.user_stats,
+            FROM users u
+            WHERE u.uid = %s
+            """

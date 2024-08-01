@@ -209,3 +209,73 @@ class DBOps:
                 cursor.close()
             if conn:
                 self.database.db_close(conn)
+                
+    def add_user_data(self, data: Dict[str, Any]) -> Dict[str, str]:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
+        conn = None
+        cursor = None
+
+        try:
+            conn = self.database.db_connect()
+            cursor = conn.cursor()
+
+            conn.autocommit = False
+
+            query = db_queries.ADD_USER
+            cursor.execute(query, (
+                data['uid'],
+                data['username'],
+                data['email'],
+                data['hashed_pw'],
+                data['user_stats'],
+            ))
+
+            conn.commit()
+
+            return {"message": "Data added successfully."}
+
+        except psycopg2.Error as e:
+            if conn:
+                conn.rollback()
+            return {"error": f"SQL Error: {str(e)}"}
+
+        finally:
+            if cursor:
+                cursor.close()
+            if conn:
+                self.database.db_close(conn)
+
+    def get_user_data(self, req_user: str) -> Dict[str, Any]:
+        """TEMPORARY PLACEHOLDER DOCSTRING!"""
+        conn = None
+        cursor = None
+    
+        try:
+            conn = self.database.db_connect()
+            cursor = conn.cursor()
+    
+            query = db_queries.GET_USER
+    
+            cursor.execute(query, (req_user,))
+    
+            row = cursor.fetchone()
+    
+            if cursor.description is None:
+                raise ValueError('No columns returned from the query')
+    
+            if row is None:
+                raise LookupError('User not found from the given parameters')
+    
+            column_names = [desc[0] for desc in cursor.description]
+            user = dict(zip(column_names, row))
+    
+            return user
+    
+        except Exception as e:
+            raise e
+    
+        finally:
+            if cursor:
+                cursor.close()
+            if conn:
+                self.database.db_close(conn)
