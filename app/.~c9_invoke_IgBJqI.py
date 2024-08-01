@@ -259,7 +259,7 @@ def init_routes(app: Flask, db_ops: DBOps) -> None:
             if not req_user:
                 raise ValueError("No user ID provided")
     
-            user = db_ops.get_user_data(req_user)
+            user = db_ops.get_marker_data(req_user)
     
             if not user:
                 raise LookupError("User could not be found in database")
